@@ -7,3 +7,5 @@ function calculateBmi(heightCm: number, weightKg: number) {
 }
 
 console.log(calculateBmi(180, 74))
+
+console.log(process.argv)
