@@ -1,11 +1,11 @@
 interface CalculatedStats {
-    daysTotal: number,
-    daysTrained: number,
-    dailyHoursTarget: number,
-    dailyHoursCalculated: number,
-    objectiveReached: boolean,
+    periodLength: number,
+    trainingDays: number,
+    target: number,
+    average: number,
+    success: boolean,
     rating: 1 | 2 | 3,
-    explanation: string,
+    ratingDescription: string,
 }
 function calculateExercises(hoursTrained: Array<number>, dailyHoursTarget: number): CalculatedStats {
     const daysTotal: number = hoursTrained.length;
@@ -23,36 +23,36 @@ function calculateExercises(hoursTrained: Array<number>, dailyHoursTarget: numbe
     }
 
     return {
-        daysTotal,
-        daysTrained,
-        dailyHoursCalculated,
-        objectiveReached,
+        periodLength: daysTotal,
+        trainingDays: daysTrained,
+        average: dailyHoursCalculated,
+        success: objectiveReached,
         rating,
-        explanation,
-        dailyHoursTarget
+        ratingDescription: explanation,
+        target: dailyHoursTarget
     };
 }
 
-const input: Array<string> = process.argv;
-if (isNaN(Number(input[2]))) {
-    throw new Error('The first argument, the target daily hours, must be a number');
-}
-const dailyHoursTarget = Number(input[2]);
-const hoursTrained: Array<number> = input.slice(3).map(v => {
-    if (isNaN(Number(v))) {
-        throw new Error('All arguments must be numbers');
-    } else {
-        return Number(v);
-    }
-});
+// const input: Array<string> = process.argv;
+// if (isNaN(Number(input[2]))) {
+//     throw new Error('The first argument, the target daily hours, must be a number');
+// }
+// const dailyHoursTarget = Number(input[2]);
+// const hoursTrained: Array<number> = input.slice(3).map(v => {
+//     if (isNaN(Number(v))) {
+//         throw new Error('All arguments must be numbers');
+//     } else {
+//         return Number(v);
+//     }
+// });
+//
+// try {
+//     console.log(calculateExercises(hoursTrained, dailyHoursTarget));
+// } catch (e) {
+//     let message;
+//     if (e instanceof Error) message = e.message;
+//     else message = String(e);
+//     console.log('Error:', message);
+// }
 
-try {
-    console.log(calculateExercises(hoursTrained, dailyHoursTarget));
-} catch (e) {
-    let message;
-    if (e instanceof Error) message = e.message;
-    else message = String(e);
-    console.log('Error:', message);
-}
-
-export {};
+export {calculateExercises};
