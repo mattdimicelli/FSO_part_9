@@ -17,6 +17,7 @@ app.get('/bmi' , (req, res) => {
             res.status(400).json('The height and weight query parameters must be positive integers');
         }
 });
+
 app.get('/saludo', (_req, res) => {
     res.send('Hello Full Stack!');
 });

@@ -30,14 +30,14 @@ function calculateExercises(hoursTrained: Array<number>, dailyHoursTarget: numbe
         rating,
         explanation,
         dailyHoursTarget
-    }
+    };
 }
 
 const input: Array<string> = process.argv;
 if (isNaN(Number(input[2]))) {
     throw new Error('The first argument, the target daily hours, must be a number');
 }
-const dailyHoursTarget: number = Number(input[2]);
+const dailyHoursTarget = Number(input[2]);
 const hoursTrained: Array<number> = input.slice(3).map(v => {
     if (isNaN(Number(v))) {
         throw new Error('All arguments must be numbers');
@@ -49,7 +49,10 @@ const hoursTrained: Array<number> = input.slice(3).map(v => {
 try {
     console.log(calculateExercises(hoursTrained, dailyHoursTarget));
 } catch (e) {
-    console.log('Error:', e.message);
+    let message;
+    if (e instanceof Error) message = e.message;
+    else message = String(e);
+    console.log('Error:', message);
 }
 
 export {};
